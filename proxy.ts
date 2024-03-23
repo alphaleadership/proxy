@@ -30,7 +30,7 @@ const name: Interceptor = (m: InterceptedHTTPMessage): void|Promise<void> => {
     fs.writeFileSync("temp.txt", requestBody);
     const timestamp = new Date().toISOString().replace(/:/g, '-');
     let content =toArrayBuffer(fs.readFileSync("temp.txt"))
-    console.log(content)
+  //  console.log(content)
     console.log(parse(content,{extra:true}))
     const extension =  parse(content,{extra:true})?.ext||".txt";
     const filename = `content/${timestamp}.${extension}`;
