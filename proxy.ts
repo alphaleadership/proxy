@@ -3,7 +3,7 @@ import { parse } from 'file-type-mime';
 import { InterceptedHTTPMessage } from './mitm';
 import type {Interceptor} from'./mitm'
 import * as fs from 'fs';
-import * as mime from 'mime';
+//import * as mime from 'mime';
 
 // Définition de la fonction intercepteur name
 function toArrayBuffer(buffer:Buffer) {
