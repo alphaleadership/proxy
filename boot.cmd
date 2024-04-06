@@ -1,0 +1,1 @@
+start C:\Users\MPA\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\Scripts\mitmdump.exe  -s d:\webengine\scripts\proxy.py --set onlyInterceptTextFiles=false --ssl-insecure    

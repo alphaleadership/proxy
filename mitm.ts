@@ -1,11 +1,11 @@
-import {Server as WebSocketServer} from 'ws';
+import { WebSocketServer} from 'ws';
 import {spawn, ChildProcess} from 'child_process';
 import {resolve} from 'path';
 import {parse as parseURL, Url} from 'url';
 import {get as httpGet} from 'http';
 import {get as httpsGet} from 'https';
 import {createConnection, Socket} from 'net';
-
+import * as fs from 'fs'
 /**
  * Wait for the specified port to open.
  * @param port The port to watch for.
@@ -390,7 +390,7 @@ export default class MITMProxy {
         // allow self-signed SSL certificates
         options.push("--ssl-insecure");
         console.log(options)
-        const mitmProcess = spawn("mitmdump", options, {
+        const mitmProcess = spawn(fs.readFileSync("./mitmdump.txt").toString(), options, {
           stdio: 'inherit'
         });
         const mitmProxyExited = new Promise<void>((_, reject) => {
@@ -408,11 +408,9 @@ export default class MITMProxy {
           // Fails if mitmproxy exits before port becomes available.
           await Promise.race([mitmProxyExited, waitingForPort]);
         } catch (e) {
-          if (e ) {
-            throw new Error(`mitmdump, which is an executable that ships with mitmproxy, is not on your PATH. Please ensure that you can run mitmdump --version successfully from your command line.`)
-          } else {
+         
             throw new Error(`Unable to start mitmproxy: ${e}`);
-          }
+          
         }
       }
       await proxyConnected;

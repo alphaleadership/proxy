@@ -80,12 +80,12 @@ class WebSocketAdapter:
     def configure(self, updates):
         if "intercept" in updates:
             self.intercept_paths = frozenset(ctx.options.intercept.split(","))
-            #print("Intercept paths:")
-            #print(self.intercept_paths)
+            print("Intercept paths:")
+            print(self.intercept_paths)
         if "onlyInterceptTextFiles" in updates:
             self.only_intercept_text_files = ctx.options.onlyInterceptTextFiles
-            #print("Only intercept text files:")
-            #print(self.only_intercept_text_files)
+            print("Only intercept text files:")
+            print(self.only_intercept_text_files)
         return
 
     def send_message(self, metadata, data1, data2):
@@ -107,13 +107,13 @@ class WebSocketAdapter:
             'response': None
         }
         # We use the lock to marry multithreading with asyncio.
-        #print("acquiring lock")
+        print("acquiring lock")
         obj['lock'].acquire()
-        #print("inserting into list")
+        print("inserting into list")
         self.queue.put(obj)
-        #print("waiting")
+        print("waiting")
         obj['lock'].wait()
-        #print("wait finished!")
+        print("wait finished!")
         new_response = obj['response']
         if new_response is None:
             # Never got a response / an error occurred
